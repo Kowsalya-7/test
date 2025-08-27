@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools{
+        maven 'Maven'
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -8,7 +11,12 @@ pipeline {
         }
         stage('Build with Maven') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean install'
+            }
+        }
+        stage('Package'){
+            steps{
+                sh 'mvn package'
             }
         }
         stage('Deploy to Tomcat using Ansible') {
