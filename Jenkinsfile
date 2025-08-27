@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage('github validation'){
           steps{
-                 git url: 'https://github.com/Kowsalya-7/test.git'
+                 git branch: 'main', url: 'https://github.com/Kowsalya-7/test.git'
           }
         }
         stage('compiling the code'){
