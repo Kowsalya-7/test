@@ -11,12 +11,7 @@ pipeline {
         }
         stage('Build with Maven') {
             steps {
-                sh 'mvn clean install'
-            }
-        }
-        stage('Package'){
-            steps{
-                sh 'mvn package'
+                sh 'mvn clean package'
             }
         }
         stage('Deploy to Tomcat using Ansible') {
