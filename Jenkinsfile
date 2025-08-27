@@ -24,9 +24,9 @@ pipeline{
                 sh 'mvn package'
             }
         }
-        stage("deploy the project on tomcat"){
-            steps{
-                sh "sudo mv /var/lib/jenkins/workspace/pipeline/target/addressbook.war /home/ubuntu/apache-tomcat-8.5.100/webapps/"
+        stage('Deploy to Tomcat using Ansible') {
+            steps {
+                sh 'ansible-playbook -i inventory.ini deploy.yml'
             }
         }
     }
