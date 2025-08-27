@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    triggers{
+        githubpush()
+    }
     tools{
         maven 'Maven'
     }
