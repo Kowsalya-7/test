@@ -1,22 +1,34 @@
-pipeline {
+pipeline{
     agent any
-    tools{
-        maven 'Maven'
-    }
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Kowsalya-7/test.git'
+    stages{
+        stage('github validation'){
+          steps{
+                 git url: 'https://github.com/Kowsalya-7/test.git'
+          }
+        }
+        stage('compiling the code'){
+          steps{
+                 sh 'mvn compile'
+          }
+        }
+        stage('testing the code'){
+            steps{
+                sh 'mvn test'
             }
         }
-        stage('Build with Maven') {
-            steps {
-                sh 'mvn clean package'
+        stage('qa of the code'){
+            steps{
+                sh 'mvn pmd:pmd'
             }
         }
-        stage('Deploy to Tomcat using Ansible') {
-            steps {
-                sh 'ansible-playbook -i inventory.ini deploy.yml'
+        stage('package'){
+            steps{
+                sh 'mvn package'
+            }
+        }
+        stage("deploy the project on tomcat"){
+            steps{
+                sh "sudo mv /var/lib/jenkins/workspace/pipeline/target/addressbook.war /home/ubuntu/apache-tomcat-8.5.100/webapps/"
             }
         }
     }
