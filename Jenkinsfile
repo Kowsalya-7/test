@@ -19,11 +19,6 @@ pipeline{
                 sh 'mvn test'
             }
         }
-        stage('qa of the code'){
-            steps{
-                sh 'mvn pmd:pmd'
-            }
-        }
         stage('package'){
             steps{
                 sh 'mvn package'
