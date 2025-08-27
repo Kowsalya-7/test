@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/<your-username>/my-addressbook-cicd.git'
+                git branch: 'main', url: 'https://github.com/Kowsalya-7/test.git'
             }
         }
         stage('Build with Maven') {
